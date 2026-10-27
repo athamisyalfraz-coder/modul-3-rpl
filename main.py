@@ -1,5 +1,5 @@
-from controllers.buku_controller import BukuController
+from controllers.anggota_controller import AnggotaController
 
 if __name__ == "__main__":
-    app = BukuController()
+    app = AnggotaController()
     app.run()
