@@ -1,0 +1,79 @@
+def hapus_data(self):
+        # Mendapatkan item yang dipilih di tabel
+        selected_item = self.view.tabel.selection()
+        if not selected_item:
+            messagebox.showwarning("Peringatan", "Pilih data buku yang ingin dihapus!")
+            return
+        
+        # Mengambil ID buku dari kolom pertama (index 0) pada baris yang dipilih
+        item_values = self.view.tabel.item(selected_item, 'values')
+        id_buku = item_values[0]
+
+        # Konfirmasi penghapusan
+        konfirmasi = messagebox.askyesno("Konfirmasi", f"Apakah Anda yakin ingin menghapus buku dengan ID {id_buku}?")
+        if konfirmasi:
+            berhasil = self.model.delete_buku(id_buku)
+            if berhasil:
+                messagebox.showinfo("Sukses", "Data buku berhasil dihapus!")
+                self.muat_data_tabel()
+            else:
+                messagebox.showerror("Error", "Terjadi kesalahan saat menghapus data.")
+
+    def perbarui_data(self):
+        # Mendapatkan item yang dipilih di tabel
+        selected_item = self.view.tabel.selection()
+        if not selected_item:
+            messagebox.showwarning("Peringatan", "Pilih data buku yang ingin diperbarui!")
+            return
+
+        # Mengambil ID buku dari baris yang dipilih
+        item_values = self.view.tabel.item(selected_item, 'values')
+        id_buku = item_values[0]
+
+        # Mengambil teks dari kotak input di View
+        judul = self.view.entry_judul.get()
+        penulis = self.view.entry_penulis.get()
+        tahun = self.view.entry_tahun.get()
+
+        # Validasi Form Kosong
+        if not judul or not penulis or not tahun:
+            messagebox.showwarning("Peringatan", "Semua kolom form harus diisi!")
+            return
+
+        # Mengirim data ke Model untuk diperbarui
+        berhasil = self.model.update_buku(id_buku, judul, penulis, tahun)
+
+        if berhasil:
+            messagebox.showinfo("Sukses", "Data buku berhasil diperbarui!")
+            # Bersihkan form input
+            self.view.entry_judul.delete(0, 'end')
+            self.view.entry_penulis.delete(0, 'end')
+            self.view.entry_tahun.delete(0, 'end')
+            # Muat ulang tabel agar data terbaru muncul
+            self.muat_data_tabel()
+        else:
+            messagebox.showerror("Error", "Terjadi kesalahan saat memperbarui data.")
+
+
+
+
+
+        anggota
+
+
+
+
+
+
+
+
+
+        #main py nya
+
+        from controllers.anggota_controller import AnggotaController
+
+if __name__ == "__main__":
+    app = AnggotaController()
+    app.run()
+
+    

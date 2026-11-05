@@ -14,6 +14,8 @@ class AnggotaModel:
     self.conn.commit()
     cursor.close()
 
+  
+
   def get_all_anggota(self):
     cursor = self.conn.cursor(dictionary=True)
     query = "SELECT * FROM anggota"
